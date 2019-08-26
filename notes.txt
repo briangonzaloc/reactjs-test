@@ -138,3 +138,93 @@ import { Redirect, Route } from "react-router-dom";
 -----------------------------------------------
 Introducción del ciclo de vida de un componente
 -----------------------------------------------
+Montaje:
+    Representa el momento donde se inserta el código del componente en el DOM.
+    Se llaman tres métodos: constructor(inicializaciones de estados), render, componentDidMount(luego de ser renderizado).
+Render')
+        return (
+Actualización:
+    Ocurre cuando los props o el estado del componente cambian. El componente vuelve a renderizarse
+    Se llaman dos métodos: render, componentDidUpdate(recibe props anteriores al cambio y el estado anterior).
+
+Desmontaje:
+    Nos da la oportunidad de hacer limpieza de nuestro componente. Por ejemplo cuando se navega de una pag a otra
+    Se llama un método: componentWillUnmount(Lugar perfecto para limpiar memoria como timeout).
+    Antes de que se vaya el completamente del DOM
+
+Igual hay mas estados.
+
+--------------------------
+Práctica del ciclo de vida
+--------------------------
+Si el request termina despues de haber cambiado de pagina, sale el siguiente warning
+NO se puede actualizar estado cuando el componente no existe.
+Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in the componentWillUnmount method.
+    in Badges (created by Context.Consumer)
+
+------------------------------
+Introducción llamadas a un API
+------------------------------
+Tres estados: Loading, error, data
+
+---------------------
+Enviando datos (POST)
+---------------------
+npm install md5
+
+
+Las rutas le pasan a loas pages tres props, history, location, match
+this.props.history.push('/badges')
+
+-----------------------
+Actualizando datos (PUT)
+-----------------------
+En las rutas declaramos /badges/:badgeId/edit, el parametro es enviado por la ruta a la pagina a traves de
+this.props.match.params.badgeId
+
+---------------------------
+Actualizaciones automáticas
+---------------------------
+Por medio de polling
+
+------------------------------------
+UI Components y Container Components
+------------------------------------
+
+BadgeDetailsContainer.js para traer la informacion y BadgeDetails.js para mostrar el contenido
+
+--------
+Portales
+--------
+Por los z-index
+Portales se renderizan fuera del nodo principal de nuestra app para que no haya interferencias con z-index
+{ReactDOM.createPortal(<h1>holaa</h1>, document.getElementById('modal'))}
+y se agrega en el index.html <div id="modal">
+
+Para sobreposicionarlo arriba
+
+CUando es un componente funcional como function BadgeDetails NO tiene manejo de estadoo, entonces se lo teien que pasar al contenedor, el padre
+
+DeleteBadgeModal
+
+-----
+Hooks
+-----
+Hasta ahora construimos componentes clases o funciones
+Cuando son funciones es porque ese componente no tiene estado propio que manejar, ciclos de vidas a los que se tiene que subscribir.
+Las clases si, con peticiones a apis, errors, exact
+
+Las funciones no tienen un estado propio que manejar como ciclos de vida a los que deben suscribirse, mientras tanto las clases sí cuentan con ello.
+
+React tiene un feature llamado Hooks que permite que las funciones también tengan features que solamente tienen las clases.
+
+Hooks: Permiten a los componentes funcionales tener características que solo las clases tienen:
+    useState: Para manejo de estado.
+    useEffect: Para suscribir el componente a su ciclo de vida.
+    useReducer: Ejecutar un efecto basado en una acción.
+
+Custom Hooks: Usamos los hooks fundamentales para crear nuevos hooks custom. Estos hooks irán en su propia función y su nombre comenzará con la palabra use. 
+Otra de sus características es que no pueden ser ejecutados condicionalmente (if).
+    useState regresa un arreglo de dos argumentos.
+
+Minuto 3

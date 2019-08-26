@@ -7,9 +7,9 @@ import Badge from '../components/Badge';
 import PageLoading from '../components/PageLoading';
 import api from '../api';
 
-class BadgeNew extends React.Component{
+class BadgeEdit extends React.Component{
     state = {
-        loading: false,
+        loading: true,
         error: null,
         form: {
             firstName : '',
@@ -20,20 +20,21 @@ class BadgeNew extends React.Component{
         }
     }
 
+    componentDidMount(){
+        this.fetchData()
+    }
+
+    fetchData = async (e) => {
+        this.setState({ loading: true, error: null });
+        try {
+            const data = await api.badges.read(this.props.match.params.badgeId)
+            this.setState({ loading: false, form: data});
+        }catch (error){
+            this.setState({ loading: false, error: error })
+        }
+    }
+
     handleChange = e => {
-        // Override form. Bad
-        // this.setState({
-        //     form : {
-        //         [e.target.name]: e.target.value
-        //     }
-        // })
-
-        // First solution
-        // const nextForm = this.state.form
-        // nextForm[e.target.name] = e.target.value
-        // this.setState({form : nextForm})
-
-        // Best apprach. Concat previous values of form and add the new value
         this.setState({
             form: {
                 ... this.state.form,
@@ -48,15 +49,12 @@ class BadgeNew extends React.Component{
         this.setState({ loading : true, error : null });
         
         try{
-            await api.badges.create(this.state.form)
+            await api.badges.update(this.props.match.params.badgeId, this.state.form)
             this.setState({ loading : false });
             this.props.history.push('/badges')
 
         } catch (error){
-            this.setState({
-                loading : false,
-                error : error
-            })
+            this.setState({loading : false, error : error })
         }
     }
 
@@ -84,7 +82,7 @@ class BadgeNew extends React.Component{
                         </div>
 
                         <div className="col-6">
-                            <h1>New attendant</h1>
+                            <h1>Edit attendant</h1>
                             <BadgeForm  
                                 onChange={this.handleChange} 
                                 onSubmit={this.handleSubmit}
@@ -98,4 +96,4 @@ class BadgeNew extends React.Component{
     }
 }
 
-export default BadgeNew
+export default BadgeEdit
