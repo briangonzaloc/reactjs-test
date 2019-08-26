@@ -1,0 +1,140 @@
+npm install -g create-react-app
+create-react-app [project_name]
+Installa react, configura el entorno, Webpack, y crea el proyecto
+
+-node_modules
+-public
+-src
+	-index.js #punto de entrada
+	-app.js # codigo jsx
+
+
+
+Comenzar el ambiente de desarrollo:
+cd project_name
+npm run start 
+
+
+Babel: Traduce Javascript moderno (JSX) a un Javascript que todos los navegadores puedan interpretar.
+Eslint: Lee el código y avisa de errores.
+
+CLone
+npm install
+npm run start
+
+const jsx = (
+    <div>
+        <h1>HOla, soy brian</h1>
+        <p>soy estudiante frontend</p>
+    </div>
+);
+const element = React.createElement(
+    'div',
+    {},
+    React.createElement('h1', {}, 'hola apap'),
+    React.createElement('p', {}, 'soy estudiante'),
+)
+jsx >>>>> React.createElement
+jsx de aca a la china
+
+
+-----------
+Componentes
+-----------
+BLoques de construcción, como figuras de Leg
+
+Componente(clase) vs elemento(objeto)
+Si el elemento fuera una casa, el componente sería los planos para hacer esa casa
+Dentro de brackets son los elementos
+
+Es decir, en el componente dice que hay una foto, texto. Y cada uno de estos seran elementos
+Una barra de busqueda es un componente
+
+montaje es el primer paso del ciclo de vida de un componente
+cuando los componenetes se actualizan se ejecuta un 
+render() que actualiza el DOM y luego react invoca a 
+componentDidUpdate() para reaccionar a cambios.
+componentWillUnmount() seguido de eliminar el codigo del DOM
+
+-----------------------
+Crear primer componente
+-----------------------
+Componente Badge
+Webpack se encarga de empaquetar el svg en una imagen
+Para installar bootstrap con npm: npm install bootstrap
+
+Cómo aplicar estilos
+1- Localmente: import './styles/Badge.css' y lo usamos con el attr className
+2- bootstrap: hacemos referencia al archivo css
+
+-----
+Props
+-----
+Atributos de nuestros componentes
+
+----------------------
+Nuestra primera página
+----------------------
+Pagina: un componente que tiene varios componenetes
+
+----------------
+Manejo de estado
+----------------
+Dos copias de los datos
+Cada input guarda su propio valor
+y ademas con el setState tambien guarda el valor
+
+Por lo tanto habria que tener una sola fuente de informacion
+setState y state
+
+------------------------
+Levantamiento del estado
+------------------------
+
+---------------------
+Listas de componentes
+---------------------
+index.js:1437 Warning: Each child in a list should have a unique "key" prop.
+Cada elemento de una lista debe tener un prop unico llamado key. IMportante para que react determina cuando elemento se vuelve 
+a renderizar saber si se mantuvo en la lista o si cambio.
+Key es el id, siempre tiene que ser unico
+
+---------------------------
+Introducción a React Router
+---------------------------
+SPA SINGLE PAGE APP PAPAAAAAA
+4 componenetes que usamos: 
+BrowserRouter: es la principal. Los otros tres componentes tienen que ir dentro de este
+Route: path y component, a donde redirige y que componentes va a mostrar(que pagina) y ademas recibe 3 props: match, history y location
+Switch: sirve para presentar una sola ruta de varias
+Link: reemplaza al elemento <a>, evita que se recargue la pagina completamente y actualiza la URL de la barra de navegacion
+
+npm install react-router-dom
+
+----------------------------------
+División de la aplicación en rutas
+----------------------------------
+Si no estuviera el Switch renderizaria varias vistas
+/badges y /badges/new coinciden en la primera parte
+Por esto se agrega la propiedad exact a Route
+Si dejamos con el tag a se sigue recargando. Hay que usar Link
+
+-----------------------------------------
+Mejorando la User Interface con un Layout
+-----------------------------------------
+El Navbar se repite siempre
+Layout o plantilla en comun para todas las paginas
+props.children en Layout para renderizar todos los elementos hijos de Layout utilizado en App.js
+
+SIEMPRE dentro de los render retornamos un solo elemento, por eso lo ponemos todo dentro de un DIV
+Lo evitamos con <React.Fragment>
+
+import { Redirect, Route } from "react-router-dom";
+
+<Route path="/404" component={MiComponente404} />
+<Redirect from="*" to="/404" />
+
+
+-----------------------------------------------
+Introducción del ciclo de vida de un componente
+-----------------------------------------------
